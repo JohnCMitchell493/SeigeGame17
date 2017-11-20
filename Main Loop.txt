@@ -1,0 +1,42 @@
+import pygame
+import Cannon
+import Castle
+import Rock
+
+class Controller:
+	def __init__(self):
+		pygame.init()
+		self.display = pygame.display.set_mode(400,300)
+		self.background = pygame.Surface(self.display.get_size()).
+		self.rock = rock.Rock("Rock")
+		done = False
+		while not done:
+			for event in pygame.event.get():
+				if(event.type == pygame.QUIT):
+					done = True
+				elif event.type = pygame.KEYDOWN:
+					if event.key == pygame.K_UP:
+					self.hero.move_up()
+			self.display.blit(self.background)
+			self.sprites.draw(self.display)
+			#be careful that when you call this, which flushes all events and returns them as a list, YOU SHOULD ONLY CALL THIS ONCE
+	def mainLoop(self):
+	while True:
+		#display title screen with start and quit options
+		self.background.fill((0,225,225))
+		
+		
+		
+		#Main Game screen 
+		
+		
+		
+		#Victory Screen 
+
+
+		#Post Victory screen with quit and retry options
+		
+def main():
+	main_window = Conrtoller()
+	main_window.mainLoop()
+main()
