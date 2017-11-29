@@ -1,40 +1,57 @@
 import pygame
-import Cannon
-import Castle
-import Rock
+import cannon
+import castle
+import rock
 
+class MenuScreen:
+	def __init__(self, width=400, height=300)
+		pygame.init()
+		self.width = width
+		self.height = height
+		self.display = pygame.display.set_mode(width,height)
+		self.background = pygame.Surface(self.display.get_size())
+	def mainLoop(self):
+		while True:
+			#display title screen with start and quit options
+			self.background.fill((0,225,225))
+			textfont = pygame.font.SysFont("helvetica", 15)
+			start = textfont.render("Start" 1, (255, 255, 0))
+			screen.blit(label, (100, 300))
+			self.background.fill((0,225,225))
+			textfont = pygame.font.SysFont("helvetica", 15)
+			start = textfont.render("Start" 1, (255, 255, 0))
+			screen.blit(label, (300, 300))
 class Controller:
 	def __init__(self):
 		pygame.init()
-		self.display = pygame.display.set_mode(400,300)
-		self.background = pygame.Surface(self.display.get_size()).
-		self.rock = rock.Rock("Rock")
+		self.cannon = cannon.Cannon("Rock")
 		done = False
 		while not done:
 			for event in pygame.event.get():
-				if(event.type == pygame.QUIT):
+				if event.type == pygame.QUIT:
 					done = True
 				elif event.type = pygame.KEYDOWN:
 					if event.key == pygame.K_UP:
-					self.hero.move_up()
+						self.hero.move_up()
+					if event.key == pygame.K_DOWN:
+						self.hero.move_up()
+					if event.key == pygame.K_LEFT:
+						self.hero.move_up()
+					if event.key == pygame.K_RIGHT:
+						self.hero.move_up()
 			self.display.blit(self.background)
 			self.sprites.draw(self.display)
-			#be careful that when you call this, which flushes all events and returns them as a list, YOU SHOULD ONLY CALL THIS ONCE
-	def mainLoop(self):
-	while True:
-		#display title screen with start and quit options
-		self.background.fill((0,225,225))
 		
 		
 		
-		#Main Game screen 
+			#Main Game screen 
 		
 		
 		
-		#Victory Screen 
+			#Victory Screen 
 
 
-		#Post Victory screen with quit and retry options
+			#Post Victory screen with quit and retry options
 		
 def main():
 	main_window = Conrtoller()
