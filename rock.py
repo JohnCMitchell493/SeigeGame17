@@ -1,0 +1,26 @@
+class Rock:
+	def __init__(self, name, filename):
+		self.name = name
+		self.x = 0
+		self.y = 0
+		self.image = filename
+		rocky = pygame.surface(5,5)		#creates rock rect
+		ball = rocky.get_rect()			#creates rock rect surface
+#		pygame.draw.circle(filename, (self.x,self.y), radius)
+
+	def launch(self, angle, velocity):
+		self.angle = angle
+		self.velocity = velocity
+		gravity = -9.8		#gravity is constant
+		self.time = 1000
+		velx = (velocity * sin(angle))/(sin(90))	#calculates initial x distance
+		vely = (velocity * sin(180-(angle+90)))/(sin(90))	#calculates initial y distance
+#		xcoor = velx/i
+#		ycoor = vely/i
+		ball.pygame.Rect.move(velx, vely)	#moves to coordinates calculated above.  This is also the initial velocity for the fromula loop below
+		for i in range(1, self.time):		#formula loop.  i is time.  Does not actually loop every second, look into later
+#			newvely = vely - (gravity*i)
+			xmove = velx*i					#horizontal distance = speed*time, horizontal speed is constant because no wind
+			ymove = (vely)(i)-(.5)(gravity)((i)**2)		#vertical distance = (initial velocity)(time) - (1/2)(gravity)(time**2)
+			ball.pygame.Rect.move(xmove,ymove)		#Move to new location based on calculated position
+#			vely = newvely
