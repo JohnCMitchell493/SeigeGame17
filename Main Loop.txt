@@ -19,7 +19,7 @@ class MenuScreen:
 			screen.blit(label, (100, 300))
 			self.background.fill((0,225,225))
 			textfont = pygame.font.SysFont("helvetica", 15)
-			start = textfont.render("Start" 1, (255, 255, 0))
+			start = textfont.render("Quit" 1, (255, 255, 0))
 			screen.blit(label, (300, 300))
 class Controller:
 	def __init__(self):
