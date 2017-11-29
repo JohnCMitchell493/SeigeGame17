@@ -4,7 +4,7 @@ import castle
 import rock
 
 class Controller:
-	def __init__(self, width=400, height=300)
+	def __init__(self, width=400, height=300):
 		pygame.init()
 		self.width = width
 		self.height = height
