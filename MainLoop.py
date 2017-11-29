@@ -18,27 +18,33 @@ class Controller:
 			#display title screen with start and quit options
 			self.background.fill((0,225,225))
 			textfont = pygame.font.SysFont("helvetica", 15)
-			start = textfont.render("Start" 1, (255, 255, 0))
+			start = textfont.render("Start", 1, (255, 255, 0))
 			screen.blit(label, (100, 300))
 			self.background.fill((0,225,225))
 			textfont = pygame.font.SysFont("helvetica", 15)
-			start = textfont.render("Start" 1, (255, 255, 0))
+			start = textfont.render("Start", 1, (255, 255, 0))
 			screen.blit(label, (300, 300))
-			self.cannon = cannon.Cannon("Rock")
+			self.cannon = cannon.Cannon("Cannon")
 			done = False
 			while not done:
 				for event in pygame.event.get():
 					if event.type == pygame.QUIT:
 						done = True
-					elif event.type = pygame.KEYDOWN:
+					elif event.type == pygame.KEYDOWN:
 						if event.key == pygame.K_UP:
-							self.hero.move_up()
+							angle = 1
+							cannon.angleChange(angle)
 						if event.key == pygame.K_DOWN:
-							self.hero.move_up()
+							angle = -1
+							cannon.angleChange(angle)
 						if event.key == pygame.K_LEFT:
-							self.hero.move_up()
+							power = -1
+							cannon.powerChange(power)
 						if event.key == pygame.K_RIGHT:
-							self.hero.move_up()
+							power = 1
+							cannon.powerChange(power)
+						if event.key == pygame.K_SPACE:
+							cannon.shoot()
 				self.display.blit(self.background)
 				self.sprites.draw(self.display)
 		
