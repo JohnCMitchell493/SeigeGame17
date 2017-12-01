@@ -18,12 +18,12 @@ class Controller:
 			#display title screen with start and quit options
 			self.background.fill((0,225,225))
 			textfont = pygame.font.SysFont("helvetica", 15)
-			start = textfont.render("Start", 1, (255, 255, 0))
-			screen.blit(start, (100, 300))
+			startGame = textfont.render("Start", 1, (255, 255, 0))
+			screen.blit(startGame, (100, 300))
 			self.background.fill((0,225,225))
 			textfont = pygame.font.SysFont("helvetica", 15)
-			quit = textfont.render("Quit", 1, (255, 255, 0))
-			screen.blit(quit, (300, 300))
+			quitGame = textfont.render("Quit", 1, (255, 255, 0))
+			screen.blit(quitGame, (300, 300))
 			self.cannon = cannon.Cannon("Cannon")
 			done = False
 			while not done:
