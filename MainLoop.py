@@ -17,6 +17,7 @@ class Controller:
 		while True:
 			#display title screen with start and quit options
 			self.background.fill((0,225,225))
+			mouse = pygame.mouse.get_pos()
 			textfont = pygame.font.SysFont("helvetica", 15)
 			startGame = textfont.render("Start", 1, (255, 255, 0))
 			screen.blit(startGame, (100, 300))
