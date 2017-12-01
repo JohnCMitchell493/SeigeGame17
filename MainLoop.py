@@ -18,13 +18,20 @@ class Controller:
 			#display title screen with start and quit options
 			self.background.fill((0,225,225))
 			mouse = pygame.mouse.get_pos()
+			
+			#Start Button
 			textfont = pygame.font.SysFont("helvetica", 15)
 			startGame = textfont.render("Start", 1, (255, 255, 0))
 			screen.blit(startGame, (100, 300))
+			
+			#Quit Button
 			textfont = pygame.font.SysFont("helvetica", 15)
 			quitGame = textfont.render("Quit", 1, (255, 255, 0))
 			screen.blit(quitGame, (300, 300))
+			
 			self.cannon = cannon.Cannon("Cannon")
+			
+			#Event Processing
 			done = False
 			while not done:
 				for event in pygame.event.get():
@@ -45,6 +52,8 @@ class Controller:
 							cannon.powerChange(power)
 						if event.key == pygame.K_SPACE:
 							cannon.shoot()
+					elif event.type == pygame.MOUSEBUTTONDOWN:
+						mouse_pos = pygame.mouse.get_pos()
 				self.display.blit(self.background)
 				self.sprites.draw(self.display)
 		
