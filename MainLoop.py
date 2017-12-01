@@ -20,7 +20,6 @@ class Controller:
 			textfont = pygame.font.SysFont("helvetica", 15)
 			startGame = textfont.render("Start", 1, (255, 255, 0))
 			screen.blit(startGame, (100, 300))
-			self.background.fill((0,225,225))
 			textfont = pygame.font.SysFont("helvetica", 15)
 			quitGame = textfont.render("Quit", 1, (255, 255, 0))
 			screen.blit(quitGame, (300, 300))
