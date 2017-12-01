@@ -19,11 +19,11 @@ class Controller:
 			self.background.fill((0,225,225))
 			textfont = pygame.font.SysFont("helvetica", 15)
 			start = textfont.render("Start", 1, (255, 255, 0))
-			screen.blit(label, (100, 300))
+			screen.blit(start, (100, 300))
 			self.background.fill((0,225,225))
 			textfont = pygame.font.SysFont("helvetica", 15)
-			start = textfont.render("Start", 1, (255, 255, 0))
-			screen.blit(label, (300, 300))
+			quit = textfont.render("Quit", 1, (255, 255, 0))
+			screen.blit(quit, (300, 300))
 			self.cannon = cannon.Cannon("Cannon")
 			done = False
 			while not done:
