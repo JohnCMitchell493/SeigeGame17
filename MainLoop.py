@@ -17,7 +17,6 @@ class Controller:
 		while True:
 			#display title screen with start and quit options
 			self.background.fill((0,225,225))
-			mouse = pygame.mouse.get_pos()
 			
 			#Start Button
 			textfont = pygame.font.SysFont("helvetica", 15)
@@ -54,9 +53,9 @@ class Controller:
 						if event.key == pygame.K_SPACE:
 							cannon.shoot()
 					elif event.type == pygame.MOUSEBUTTONDOWN:
-						mouse_pos = pygame.mouse.get_pos()
+						mouse = pygame.mouse.get_pos()
 				self.display.blit(self.background)
-				self.sprites.draw(self.display)
+
 		
 		
 		
