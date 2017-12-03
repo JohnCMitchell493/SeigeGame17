@@ -4,7 +4,7 @@ import castle
 import rock
 
 class Controller:
-	def __init__(self, width=400, height=300):
+	def __init__(self, width=640, height=480):
 		pygame.init()
 		self.width = width
 		self.height = height
@@ -19,7 +19,7 @@ class Controller:
 		
 	#Start Button
 	def startButton(self):
-		start = pygame.draw.rect(self.screen, (192,192,192), self.startRect, width=0)
+		start = pygame.draw.rect(self.screen, (192,192,192), self.startRect, 0)
 		#Draws the rectangle
 		startGame = self.textfont.render("Start", 1, (255, 255, 0))
 		self.screen.blit(start, (150, 200))
@@ -30,7 +30,7 @@ class Controller:
 		
 	#Quit Button
 	def quitButton(self):
-		quit = pygame.draw.rect(self.screen, (192,192,192), self.quitRect, width=0)
+		quit = pygame.draw.rect(self.screen, (192,192,192), self.quitRect, 0)
 		#Draws the rectangle
 		quitGame = self.textfont.render("Quit", 1, (255, 255, 0))
 		self.screen.blit(quit, (250, 200))
