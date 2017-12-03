@@ -3,8 +3,7 @@ import castle
 
 class Rock(pygame.sprite.Sprite):
 
-	def __init__(self, name, filename):
-		self.name = name
+	def __init__(self, filename):
 		self.x = 0
 		self.y = 0
 		self.image = pygame.image.load("filename").convert()
