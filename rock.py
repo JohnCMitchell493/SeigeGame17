@@ -36,7 +36,7 @@ class Rock(pygame.sprite.Sprite):
 			ymove = 480-((vely)(i)-(.5)(gravity)((i)**2))		#vertical distance = (initial velocity)(time) - (1/2)(gravity)(time**2)
 			ball.pygame.Rect.move(xmove,ymove)		#Move to new location based on calculated position
 #			vely = newvely
-			if checkCollision(self.rect, castle.rect) == False
+			if checkCollision(self.rect, castle.rect) == False:
 				if xmove >= 400:				#if the rock's position moves to below the 'ground', or to beyond the 'right
 					ball.pygame.Rect.move(500,500)		#border', the rock automatically relocates to a position outside the game
 					return 'Miss!'
