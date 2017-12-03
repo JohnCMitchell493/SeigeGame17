@@ -8,7 +8,7 @@ class cannon:
 		angle_label = my_font.render("Angle:" +str(self.angle), black)	#displays angle text
 		power_label = my_font.render("Power:" +str(self.power), black)	#displays velocity text
 
-	def angleChange(self, inc/dec):		#raises/lowers angle
+	def angleChange(self, incdec):		#raises/lowers angle
 		if inc/dec > 0:			#from controller, feed a positive or negative number, + for up
 			if self.angle == 90:	#Angle should not exceed 90 degrees, if it tries to go higher it reverts to 90
 				self.angle = 90
@@ -20,7 +20,7 @@ class cannon:
 			else:
 				self.angle -= 1	#angle lowers by 1
 
-	def powerChange(self, inc/dec):		#raises/lowers initial velocity
+	def powerChange(self, incdec):		#raises/lowers initial velocity
 		if inc/dec > 0:			#from controller, feed a positive or negative number, + for up
 			if self.power == 100:	#power should not exceed 100, if it tries to go higher it reverts to 100.  likely to change intesting
 				self.power = 100
