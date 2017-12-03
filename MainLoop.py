@@ -9,7 +9,7 @@ class Controller:
 		self.width = width
 		self.height = height
 		self.screen = pygame.display.set_mode(width,height)
-		self.background = pygame.Surface(self.display.get_size())
+		self.background = pygame.Surface(self.screen.get_size())
 		self.cannon = cannon
 		self.castle = castle
 		self.rock = rock
@@ -19,21 +19,23 @@ class Controller:
 		
 	#Start Button
 	def startButton(self):
-		pygame.draw.rect(self.screen, (192,192,192), self.startRect, width=0)
+		start = pygame.draw.rect(self.screen, (192,192,192), self.startRect, width=0)
 		#Draws the rectangle
 		startGame = self.textfont.render("Start", 1, (255, 255, 0))
+		self.screen.blit(start, (150, 200))
 		self.screen.blit(startGame, (150, 200))	
-		#Blits the text to the rectangle
+		#Blits the text/button to the rect
 		pygame.display.update()
 		#Updates the screen
 		
 	#Quit Button
 	def quitButton(self):
-		pygame.draw.rect(self.screen, (192,192,192), self.quitRect, width=0)
+		quit = pygame.draw.rect(self.screen, (192,192,192), self.quitRect, width=0)
 		#Draws the rectangle
 		quitGame = self.textfont.render("Quit", 1, (255, 255, 0))
+		self.screen.blit(quit, (250, 200))
 		self.screen.blit(quitGame, (250, 200))	
-		#Blits the text to the rectangle
+		#Blits the text/button to the rect
 		pygame.display.update()
 		#Updates the screen
 		
@@ -66,9 +68,16 @@ class Controller:
 						cannon.powerChange(power)
 					if event.key == pygame.K_SPACE:
 						cannon.shoot()
-				elif event.type == pygame.MOUSEBUTTONDOWN:
+				if event.type == pygame.MOUSEBUTTONDOWN:
 					mouse = pygame.mouse.get_pos()
-			self.display.blit(self.background)
+					if quit.collide(mouse):
+						done = True
+						pygame.quit()
+						sys.exit()
+					#if start.collide(mouse):
+						#stuff that would happen when 
+						#the mouse hits the start button
+			pygame.display.update()
 
 
 
