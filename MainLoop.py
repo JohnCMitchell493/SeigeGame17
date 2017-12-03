@@ -13,20 +13,19 @@ class Controller:
 		self.cannon = cannon
 		self.castle = castle
 		self.rock = rock
+		self.textfont = pygame.font.SysFont("helvetica", 15)
 	def mainLoop(self):
 		while True:
 			#display title screen with start and quit options
 			self.background.fill((0,225,225))
 			
 			#Start Button
-			textfont = pygame.font.SysFont("helvetica", 15)
-			startGame = textfont.render("Start", 1, (255, 255, 0))
+			startGame = self.textfont.render("Start", 1, (255, 255, 0))
 			screen.blit(startGame, (100, 300))
 			
 			
 			#Quit Button
-			textfont = pygame.font.SysFont("helvetica", 15)
-			quitGame = textfont.render("Quit", 1, (255, 255, 0))
+			quitGame = self.textfont.render("Quit", 1, (255, 255, 0))
 			screen.blit(quitGame, (300, 300))
 			
 			self.cannon = cannon.Cannon("Cannon")
@@ -37,7 +36,7 @@ class Controller:
 				for event in pygame.event.get():
 					if event.type == pygame.QUIT:
 						done = True
-					elif event.type == pygame.KEYDOWN:
+					if event.type == pygame.KEYDOWN:
 						if event.key == pygame.K_UP:
 							angle = 1
 							cannon.angleChange(angle)
