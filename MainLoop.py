@@ -39,14 +39,24 @@ class Controller:
 		pygame.display.update()
 		#Updates the screen
 		
+		
+	def mainGame(self):
+		#Main Game screen
+		self.background.fill((0,225,225))
+		
+		
+		
+		
 	def mainLoop(self):
 		self.background.fill((0,225,225))
 		self.startButton()
 		self.quitButton()
 		#display title screen with start and quit options
 
-		self.cannon = cannon.Cannon("Cannon")
-
+		self.cannon = cannon.cannon("Cannon")# add the filename,xcoor,ycoor
+		self.castle = castle.castle("Castle")# add the filename,xcoor,ycoor
+		self.rock = rock.Rock("Rocky")# add the filename,xcoor,ycoor
+		
 		#Event Processing
 		done = False
 		while not done:
@@ -81,8 +91,7 @@ class Controller:
 
 
 
-
-			#Main Game screen 
+ 
 
 
 
