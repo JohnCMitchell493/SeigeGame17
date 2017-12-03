@@ -1,3 +1,4 @@
+import pygame
 class castle(pygame.sprite.Sprite):
 	hp = 3
 	def __init__(self, name, filename):
