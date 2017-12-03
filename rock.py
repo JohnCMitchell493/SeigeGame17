@@ -19,8 +19,6 @@ class Rock(pygame.sprite.Sprite):
 			return True
 		else:
 			return False
-	def move(self, surface):
-		surface.blit(self.rect, (self.x, self.y))
 
 	def launch(self, angle, velocity):
 		self.angle = angle
