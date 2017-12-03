@@ -42,13 +42,13 @@ class Controller:
 		
 	def mainGame(self):
 		#Main Game screen
-		self.background.fill((0,225,225))
+		self.screen.fill((0,225,225))
 		
 		
 		
 		
 	def mainLoop(self):
-		self.background.fill((0,225,225))
+		self.screen.fill((0,225,225))
 		self.startButton()
 		self.quitButton()
 		#display title screen with start and quit options
