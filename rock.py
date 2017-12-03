@@ -1,10 +1,10 @@
 import pygame
-class Rock:
+class Rock(pygame.sprite.sprite):
 	def __init__(self, name, filename):
 		self.name = name
 		self.image = pygame.image.load(filename)
 		rocky = pygame.sprite.Sprite(self.image,20,20)		#creates rock rect
-		ball = rocky.get_rect()			#creates rock rect surface
+#		ball = rocky.get_rect()			#creates rock rect surface
 #		pygame.draw.circle(filename, (self.x,self.y), radius)
 
 	def launch(self, angle, velocity):
