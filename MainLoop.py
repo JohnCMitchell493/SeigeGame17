@@ -19,10 +19,9 @@ class Controller:
 		
 	#Start Button
 	def startButton(self):
-		start = pygame.draw.rect(self.screen, (192,192,192), self.startRect, 0)
+		pygame.draw.rect(self.screen, (192,192,192), self.startRect, 0)
 		#Draws the rectangle
 		startGame = self.textfont.render("Start", 1, (255, 255, 0))
-		self.screen.blit(start, (150, 200))
 		self.screen.blit(startGame, (150, 200))	
 		#Blits the text/button to the rect
 		pygame.display.update()
@@ -30,10 +29,9 @@ class Controller:
 		
 	#Quit Button
 	def quitButton(self):
-		quit = pygame.draw.rect(self.screen, (192,192,192), self.quitRect, 0)
+		pygame.draw.rect(self.screen, (192,192,192), self.quitRect, 0)
 		#Draws the rectangle
 		quitGame = self.textfont.render("Quit", 1, (255, 255, 0))
-		self.screen.blit(quit, (250, 200))
 		self.screen.blit(quitGame, (250, 200))	
 		#Blits the text/button to the rect
 		pygame.display.update()
