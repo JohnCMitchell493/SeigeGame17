@@ -26,56 +26,61 @@ class Controller:
 		#Blits the text to the rectangle
 		pygame.display.update()
 		#Updates the screen
-	def mainLoop(self):
-	#display title screen with start and quit options
-	self.background.fill((0,225,225))
-
-	self.startButton()
-	
-
-
+		
 	#Quit Button
-	quitGame = self.textfont.render("Quit", 1, (255, 255, 0))
-	self.screen.blit(quitGame, (250, 200))
+	def quitButton(self):
+		pygame.draw.rect(self.screen, (192,192,192), self.quitRect, width=0)
+		#Draws the rectangle
+		quitGame = self.textfont.render("Quit", 1, (255, 255, 0))
+		self.screen.blit(quitGame, (250, 200))	
+		#Blits the text to the rectangle
+		pygame.display.update()
+		#Updates the screen
+		
+	def mainLoop(self):
+		self.background.fill((0,225,225))
+		self.startButton()
+		self.quitButton()
+		#display title screen with start and quit options
 
-	self.cannon = cannon.Cannon("Cannon")
+		self.cannon = cannon.Cannon("Cannon")
 
-	#Event Processing
-	done = False
-	while not done:
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				done = True
-			if event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_UP:
-					angle = 1
-					cannon.angleChange(angle)
-				if event.key == pygame.K_DOWN:
-					angle = -1
-					cannon.angleChange(angle)
-				if event.key == pygame.K_LEFT:
-					power = -1
-					cannon.powerChange(power)
-				if event.key == pygame.K_RIGHT:
-					power = 1
-					cannon.powerChange(power)
-				if event.key == pygame.K_SPACE:
-					cannon.shoot()
-			elif event.type == pygame.MOUSEBUTTONDOWN:
-				mouse = pygame.mouse.get_pos()
-		self.display.blit(self.background)
-
-
-
-
-		#Main Game screen 
+		#Event Processing
+		done = False
+		while not done:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					done = True
+				if event.type == pygame.KEYDOWN:
+					if event.key == pygame.K_UP:
+						angle = 1
+						cannon.angleChange(angle)
+					if event.key == pygame.K_DOWN:
+						angle = -1
+						cannon.angleChange(angle)
+					if event.key == pygame.K_LEFT:
+						power = -1
+						cannon.powerChange(power)
+					if event.key == pygame.K_RIGHT:
+						power = 1
+						cannon.powerChange(power)
+					if event.key == pygame.K_SPACE:
+						cannon.shoot()
+				elif event.type == pygame.MOUSEBUTTONDOWN:
+					mouse = pygame.mouse.get_pos()
+			self.display.blit(self.background)
 
 
 
-		#Victory Screen 
+
+			#Main Game screen 
 
 
-		#Post Victory screen with quit and retry options
+
+			#Victory Screen 
+
+
+			#Post Victory screen with quit and retry options
 
 def main():
 	main_window = Controller()
