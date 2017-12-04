@@ -1,5 +1,5 @@
 import pygame
-class cannon:
+class Cannon(pygame.sprite.Sprite):
 	def __init__(self, name, filename):
 		self.name = name
 		self.angle = 0		#angle and power/velocity default to 0
