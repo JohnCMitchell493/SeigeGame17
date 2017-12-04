@@ -39,8 +39,9 @@ class Controller:
 		
 	def mainGame(self):
 		#Main Game screen
-		self.screen.fill((0,225,225))
-		
+#		self.screen.fill((0,225,225))
+		self.cannon = cannon.Cannon("Cannon","cannon.jpg")
+		self.castle = castle.Castle("Castle","castle.png")
 		
 		
 		
@@ -51,12 +52,12 @@ class Controller:
 		self.quitButton()
 		#display title screen with start and quit options
 
-		self.cannon = cannon.Cannon("Cannon","cannon.jpg")
-		self.castle = castle.Castle("Castle","castle.png")
-		self.rock = rock.Rock("Rocky","rocky.png")
+		
+
 		
 		#Event Processing
 		done = False
+		start = False
 		while not done:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
@@ -76,16 +77,21 @@ class Controller:
 						cannon.powerChange(power)
 					if event.key == pygame.K_SPACE:
 						cannon.shoot()
+					if event.key == pygame.K_s:
+					    start = True
+					    self.mainGame()
 					if event.key == pygame.K_q:
 						#if start == FALSE: will set this to true when game starts to prevent 
-						done = True
-						pygame.quit()
-						sys.exit()
+						if start == False:
+						    done = True
+						    pygame.quit()
+						    sys.exit()
 					#if event.key == pygame.S_s:
 					#if start.collide(mouse):
 						#stuff that would happen when 
 						#the mouse hits the start button
 			pygame.display.update()
+			self.screen.blit(self.background, (0,0))
 
 
 
@@ -101,3 +107,4 @@ def main():
 	main_window = Controller()
 	main_window.mainLoop()
 main()
+
