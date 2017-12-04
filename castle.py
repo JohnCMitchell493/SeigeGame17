@@ -3,9 +3,9 @@ class Castle(pygame.sprite.Sprite):
 	hp = 3
 	def __init__(self, name, filename):
 		self.name = name
-		self.x = xcoor
-		self.y = ycoor
-		self.image = pygame.image.load("filename").convert()
+#		self.x = xcoor
+#		self.y = ycoor
+		self.image = pygame.image.load(filename).convert()
 		self.size = self.image.get_size()
 		self.image2 = pygame.transform.scale(self.image, (int(self.size[0]*.1), int(self.size[1]*.1)))
 		self.rect = self.image2.get_rect()
