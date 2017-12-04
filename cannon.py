@@ -4,7 +4,7 @@ class Cannon(pygame.sprite.Sprite):
 		self.name = name
 		self.angle = 0		#angle and power/velocity default to 0
 		self.power = 0
-		self.image = pygame.image.load("filename").convert()
+		self.image = pygame.image.load(filename).convert()
 		self.size = self.image.get_size()
 		self.image2 = pygame.transform.scale(self.image, (int(self.size[0]*.1), int(self.size[1]*.1)))
 		self.rect = self.image2.get_rect()
