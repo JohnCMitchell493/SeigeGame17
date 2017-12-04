@@ -3,6 +3,7 @@ import pygame
 import cannon
 import castle
 import rock
+import cmath
 class Controller:
 	def __init__(self, width=640, height=480):
 		pygame.init()
@@ -39,7 +40,8 @@ class Controller:
 		
 	def mainGame(self):
 		#Main Game screen
-#		self.screen.fill((0,225,225))
+		self.screen.fill((0,0,225))
+		pygame.display.update()
 		self.cannon = cannon.Cannon("Cannon","cannon.jpg")
 		self.castle = castle.Castle("Castle","castle.png")
 		
@@ -50,6 +52,7 @@ class Controller:
 		pygame.display.update()
 		self.startButton()
 		self.quitButton()
+		
 		#display title screen with start and quit options
 
 		
@@ -59,24 +62,25 @@ class Controller:
 		done = False
 		start = False
 		while not done:
+			self.screen.fill((0,225,225))
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					done = True
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_UP:
 						angle = 1
-						cannon.angleChange(angle)
+						self.cannon.angleChange(angle)
 					if event.key == pygame.K_DOWN:
 						angle = -1
-						cannon.angleChange(angle)
+						self.cannon.angleChange(angle)
 					if event.key == pygame.K_LEFT:
 						power = -1
-						cannon.powerChange(power)
+						self.cannon.powerChange(power)
 					if event.key == pygame.K_RIGHT:
 						power = 1
-						cannon.powerChange(power)
+						self.cannon.powerChange(power)
 					if event.key == pygame.K_SPACE:
-						cannon.shoot()
+						self.cannon.shoot()
 					if event.key == pygame.K_s:
 					    start = True
 					    self.mainGame()
