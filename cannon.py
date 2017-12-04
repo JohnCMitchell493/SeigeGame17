@@ -4,8 +4,10 @@ class Cannon(pygame.sprite.Sprite):
 		self.name = name
 		self.angle = 0		#angle and power/velocity default to 0
 		self.power = 0
-		self.image = pygame.image.load(filename)
-		cannon1 = pygame.sprite.Sprite(self.image,0,460)
+		self.image = pygame.image.load("filename").convert()
+		self.size = self.image.get_size()
+		self.image2 = pygame.transform.scale(self.image, (int(self.size[0]*.1), int(self.size[1]*.1)))
+		self.rect = self.image2.get_rect()
 #		my_font = pygame.font.SysFont("Times New Roman", 12)	#creates font pygame will use to display angle/velocity
 #		angle_label = my_font.render("Angle:" +str(self.angle), black)	#displays angle text
 #		power_label = my_font.render("Power:" +str(self.power), black)	#displays velocity text
