@@ -51,9 +51,9 @@ class Controller:
 		self.quitButton()
 		#display title screen with start and quit options
 
-		#self.cannon = cannon.cannon("Cannon")# add the filename,xcoor,ycoor
-		#self.castle = castle.castle("Castle")# add the filename,xcoor,ycoor
-		#self.rock = rock.Rock("Rocky")# add the filename,xcoor,ycoor
+		self.cannon = cannon.Cannon("Cannon","cannon.jpg")
+		self.castle = castle.Castle("Castle","castle.png")
+		self.rock = rock.Rock("Rocky","rocky.png")
 		
 		#Event Processing
 		done = False
@@ -89,7 +89,6 @@ class Controller:
 
 
 
- 
 
 
 
