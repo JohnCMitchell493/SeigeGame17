@@ -1,4 +1,5 @@
 import pygame
+import cmath
 import castle
 
 class Rock(pygame.sprite.Sprite):
@@ -25,8 +26,8 @@ class Rock(pygame.sprite.Sprite):
 		self.velocity = velocity
 		gravity = 9.8		#gravity is constant
 		self.time = 10000
-		velx = (velocity * sin(angle))/(sin(90))	#calculates initial x distance
-		vely = (velocity * sin(180-(angle+90)))/(sin(90))	#calculates initial y distance
+		velx = (velocity * cmath.sin(angle))/(cmath.sin(90))	#calculates initial x distance
+		vely = (velocity * cmath.sin(180-(angle+90)))/(cmath.sin(90))	#calculates initial y distance
 #		xcoor = velx/i
 #		ycoor = vely/i
 		#ball.pygame.Rect.move(velx, vely)	#moves to coordinates calculated above.  This is also the initial velocity for the fromula loop below
