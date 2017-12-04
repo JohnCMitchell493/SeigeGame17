@@ -2,6 +2,7 @@ import pygame
 class Castle(pygame.sprite.Sprite):
 	hp = 3
 	def __init__(self, name, filename):
+		pygame.sprite.Sprite.__init__(self)
 		self.name = name
 #		self.x = xcoor
 #		self.y = ycoor
