@@ -77,7 +77,7 @@ class Controller:
 					if event.key == pygame.K_SPACE:
 						cannon.shoot()
 					if event.key == pygame.K_q:
-					    #if start == FALSE: will set this to true when game starts to prevent 
+						#if start == FALSE: will set this to true when game starts to prevent 
 						done = True
 						pygame.quit()
 						sys.exit()
