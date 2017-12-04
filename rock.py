@@ -8,7 +8,7 @@ class Rock(pygame.sprite.Sprite):
 		self.y = 0
 		self.image = pygame.image.load("filename").convert()
 		self.size = self.image.get_size()
-		self.image2 = pygame.transform.scale(self.image, (int(self.size[0]*2), int(self.size[1]*2)))
+		self.image2 = pygame.transform.scale(self.image, (int(self.size[0]*.05), int(self.size[1]*.05)))
 		self.rect = self.image2.get_rect()
 #		pygame.draw.circle(filename, (self.x,self.y), radius)
 
