@@ -3,7 +3,7 @@ import pygame
 import cannon
 import castle
 import rock
-import cmath
+import math
 BLACK = (0, 0, 0)
 class Controller:
 	def __init__(self, width=640, height=480):
