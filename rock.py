@@ -14,14 +14,14 @@ class Rock(pygame.sprite.Sprite):
 		self.rect = self.image2.get_rect()
 #		pygame.draw.circle(filename, (self.x,self.y), radius)
 
-	def checkCollision(self, sprite1, sprite2):
-		collision = pygame.sprite.collide_rect(sprite1, sprite2)
-		if collision == True:
-			return True
-		else:
-			return False
+#	def checkCollision(self, object1, object2):
+#		collision = pygame.sprite.collide_rect(object1, object2)
+#		if collision == True:
+#			return True
+#		else:
+#			return False
 
-	def launch(self, angle, velocity):
+	def launch(self, angle, velocity,castle):
 		self.angle = angle
 		self.velocity = velocity
 		gravity = 9.8		#gravity is constant
@@ -37,10 +37,9 @@ class Rock(pygame.sprite.Sprite):
 			ymove = 480-((vely*i)-(.5*gravity*(i**2)))		#vertical distance = (initial velocity)(time) - (1/2)(gravity)(time**2)
 			self.rect.move(xmove,ymove)		#Move to new location based on calculated position
 #			vely = newvely
-			if Rock.checkCollision(self.rect, castle.rect) == False:
-				if xmove >= 640:				#if the rock's position moves to below the 'ground', or to beyond the 'right
-					self.rect.move(700,700)		#border', the rock automatically relocates to a position outside the game
-					return 'Miss!'
-				if ymove >= 480:
-					self.rect.move(700,700)
-					return 'Miss!'
+			if xmove >= 640:				#if the rock's position moves to below the 'ground', or to beyond the 'right
+				self.rect.move(700,700)		#border', the rock automatically relocates to a position outside the game
+				return 'Miss!'
+			if ymove >= 480:
+				self.rect.move(700,700)
+				return 'Miss!'
