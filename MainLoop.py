@@ -21,8 +21,8 @@ class Controller:
 		self.cannon = cannon.Cannon(0, 420, "cannon.jpg")
 		self.castle = castle.Castle(450, 310, "castle.png")
 		self.castlerect = self.castle.rect
-		self.cannonSprite = pygame.sprite.Group(self.cannon) #,self.castle) #Used for drawing the sprites, still a work in progress
-		self.castleSprite = pygame.sprite.Group(self.castle) #,self.castle) #Used for drawing the sprites, still a work in progress 
+		self.cannonSprite = pygame.sprite.Group(self.cannon) #,self.castle) #Used for drawing the cannon sprite
+		self.castleSprite = pygame.sprite.Group(self.castle) #,self.castle) #Used for drawing the castle sprite 
 		self.shot = 0
 	#Start Button
 		self.rockSprite = []
