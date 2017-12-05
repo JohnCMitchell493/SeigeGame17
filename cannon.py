@@ -1,11 +1,11 @@
 import pygame
 import rock
+import castle
 import math
 class Cannon(pygame.sprite.Sprite):
 	black = (0, 0, 0)
-	def __init__(self, name, xcoor, ycoor, filename):
+	def __init__(self, xcoor, ycoor, filename):
 		pygame.sprite.Sprite.__init__(self)
-		self.name = name
 		self.angle = 0		#angle and power/velocity default to 0
 		self.power = 0
 		self.image = pygame.image.load(filename).convert()
@@ -37,6 +37,5 @@ class Cannon(pygame.sprite.Sprite):
 				self.power = 0
 			else:
 				self.power -= 1	#power lowers by 1
-	def shoot(self):
-		stone = rock.Rock('rocky.jpg')	#change when classes moved to their own files
-		stone.launch(self.angle,self.power)	#shoots the damn boulder
+	def shoot(self,rock):
+		rock.launch(self.angle,self.power,castle)	#shoots the damn boulder
