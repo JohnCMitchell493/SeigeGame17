@@ -4,6 +4,7 @@ import cannon
 import castle
 import rock
 import cmath
+
 class Controller:
 	def __init__(self, width=640, height=480):
 		pygame.init()
@@ -17,17 +18,18 @@ class Controller:
 		self.textfont = pygame.font.SysFont("helvetica", 15)
 		self.startRect = pygame.Rect(180,320,80,30)
 		self.quitRect = pygame.Rect(380,320,80,30)
-		
+
 	#Start Button
 	def startButton(self):
-		pygame.draw.rect(self.screen, (192,192,192), self.startRect, 0)
+		start = pygame.draw.rect(self.screen, (192,192,192), self.startRect, 0)
 		#Draws the rectangle
 		startGame = self.textfont.render("Start", 1, (255, 255, 0))
 		self.screen.blit(startGame, (150, 200))	
 		#Blits the text/button to the rect
 		pygame.display.update()
 		#Updates the screen
-		
+
+
 	#Quit Button
 	def quitButton(self):
 		quit = pygame.draw.rect(self.screen, (192,192,192), self.quitRect, 0)
@@ -37,32 +39,28 @@ class Controller:
 		#Blits the text/button to the rect
 		pygame.display.update()
 		#Updates the screen
+
 		
 	def mainGame(self):
 		#Main Game screen
-		self.screen.fill((0,0,225))
-		pygame.display.update()
 		self.cannon = cannon.Cannon("Cannon","cannon.jpg")
 		self.castle = castle.Castle("Castle","castle.png")
-		
-		
-		
-	def mainLoop(self):
-		self.screen.fill((0,225,225))
 		pygame.display.update()
+		#At some point check castle's health and if it == 0, change to victory screen
+
+	def mainLoop(self):
 		self.startButton()
 		self.quitButton()
-		
 		#display title screen with start and quit options
 
-		
-
-		
 		#Event Processing
 		done = False
 		start = False
+		title = False
 		while not done:
-			self.screen.fill((0,225,225))
+			titleScreen = pygame.image.load("background.jpg")
+			if title == True:
+				self.screen.fill((0,225,225))
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					done = True
@@ -83,24 +81,24 @@ class Controller:
 						self.cannon.shoot()
 					if event.key == pygame.K_s:
 					    start = True
+					    #start == FALSE: will set this to true when game starts to prevent reloading the game
+					    title = True
 					    self.mainGame()
-					if event.key == pygame.K_q:
-						#if start == FALSE: will set this to true when game starts to prevent 
+					if event.key == pygame.K_q: 
 						if start == False:
 						    done = True
 						    pygame.quit()
 						    sys.exit()
-					#if event.key == pygame.S_s:
-					#if start.collide(mouse):
-						#stuff that would happen when 
-						#the mouse hits the start button
+					#if event.key == pygame.MOUSEBUTTONDOWN:
+						#mouse = pygame.mouse.get_pos()
+						#print(mouse)
+						#if quit.collide(mouse):
+							#stuff that would happen when 
+							#the mouse hits the start button
 			pygame.display.update()
 			self.screen.blit(self.background, (0,0))
-
-
-
-
-
+			self.screen.blit(titleScreen,(0,0))
+			
 
 			#Victory Screen 
 
@@ -111,4 +109,3 @@ def main():
 	main_window = Controller()
 	main_window.mainLoop()
 main()
-
