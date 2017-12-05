@@ -11,9 +11,10 @@ class Cannon(pygame.sprite.Sprite):
 		self.size = self.image.get_size()
 		self.image2 = pygame.transform.scale(self.image, (int(self.size[0]*.1), int(self.size[1]*.1)))
 		self.rect = self.image2.get_rect()
+#		black = (0, 0, 0)
 #		my_font = pygame.font.SysFont("Times New Roman", 12)	#creates font pygame will use to display angle/velocity
-#		angle_label = my_font.render("Angle:" +str(self.angle), black)	#displays angle text
-#		power_label = my_font.render("Power:" +str(self.power), black)	#displays velocity text
+#		angle_label = my_font.render("Angle:" +str(self.angle), 1, black)	#displays angle text
+#		power_label = my_font.render("Power:" +str(self.power), 1, black)	#displays velocity text
 
 	def angleChange(self, incdec):		#raises/lowers angle
 		if incdec > 0:			#from controller, feed a positive or negative number, + for up
