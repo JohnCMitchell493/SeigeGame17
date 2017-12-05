@@ -1,8 +1,9 @@
 import pygame
-import math
 import rock
+import cmath
 class Cannon(pygame.sprite.Sprite):
-	def __init__(self, name, filename):
+	black = (0, 0, 0)
+	def __init__(self, name, xcoor, ycoor, filename):
 		pygame.sprite.Sprite.__init__(self)
 		self.name = name
 		self.angle = 0		#angle and power/velocity default to 0
@@ -11,11 +12,8 @@ class Cannon(pygame.sprite.Sprite):
 		self.size = self.image.get_size()
 		self.image2 = pygame.transform.scale(self.image, (int(self.size[0]*.1), int(self.size[1]*.1)))
 		self.rect = self.image2.get_rect()
-#		black = (0, 0, 0)
-#		my_font = pygame.font.SysFont("Times New Roman", 12)	#creates font pygame will use to display angle/velocity
-#		angle_label = my_font.render("Angle:" +str(self.angle), 1, black)	#displays angle text
-#		power_label = my_font.render("Power:" +str(self.power), 1, black)	#displays velocity text
-
+		self.rect.x = xcoor
+		self.rect.y = ycoor
 	def angleChange(self, incdec):		#raises/lowers angle
 		if incdec > 0:			#from controller, feed a positive or negative number, + for up
 			if self.angle == 90:	#Angle should not exceed 90 degrees, if it tries to go higher it reverts to 90
@@ -39,8 +37,11 @@ class Cannon(pygame.sprite.Sprite):
 				self.power = 0
 			else:
 				self.power -= 1	#power lowers by 1
+#	def labels(self, angle):
+		#my_font = pygame.font.SysFont("Times New Roman", 12)	#creates font pygame will use to display angle/velocity
+		#angle_label = my_font.render("Angle:" +str(self.angle), 1, black)	#displays angle text
+		#power_label = my_font.render("Power:" +str(self.power), 1, black)	#displays velocity text
 
 	def shoot(self):
-		Stone = rock()	#change when classes moved to their own files
+		stone = rock.Rock('rocky.jpg')	#change when classes moved to their own files
 		stone.launch(self.angle,self.power)	#shoots the damn boulder
-
