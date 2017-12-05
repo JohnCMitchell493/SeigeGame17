@@ -2,9 +2,8 @@ import pygame
 import math
 class Castle(pygame.sprite.Sprite):
 	hp = 3
-	def __init__(self, name, xcoor, ycoor, filename):
+	def __init__(self, xcoor, ycoor, filename):
 		pygame.sprite.Sprite.__init__(self)
-		self.name = name
 #		self.x = xcoor
 #		self.y = ycoor
 		self.image = pygame.image.load(filename).convert()
@@ -18,8 +17,8 @@ class Castle(pygame.sprite.Sprite):
 
 	def getHit(self):
 		hp -= 1		#if the castle gets hit, it loses 1 HP.  The game is won if the castle is struck 3 times
-		return hp
-		print("Hit!")
+#		return hp
+#		print("Hit!")
 
 	def resetHP(self):
 		hp = 3		#bug testing, in case we need to run it again
