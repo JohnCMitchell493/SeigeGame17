@@ -1,6 +1,6 @@
 import pygame
 import rock
-import cmath
+import math
 class Cannon(pygame.sprite.Sprite):
 	black = (0, 0, 0)
 	def __init__(self, name, xcoor, ycoor, filename):
@@ -37,11 +37,6 @@ class Cannon(pygame.sprite.Sprite):
 				self.power = 0
 			else:
 				self.power -= 1	#power lowers by 1
-#	def labels(self, angle):
-		#my_font = pygame.font.SysFont("Times New Roman", 12)	#creates font pygame will use to display angle/velocity
-		#angle_label = my_font.render("Angle:" +str(self.angle), 1, black)	#displays angle text
-		#power_label = my_font.render("Power:" +str(self.power), 1, black)	#displays velocity text
-
 	def shoot(self):
 		stone = rock.Rock('rocky.jpg')	#change when classes moved to their own files
 		stone.launch(self.angle,self.power)	#shoots the damn boulder
