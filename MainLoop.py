@@ -4,7 +4,7 @@ import cannon
 import castle
 import rock
 import cmath
-
+BLACK = (0, 0, 0)
 class Controller:
 	def __init__(self, width=640, height=480):
 		pygame.init()
@@ -18,9 +18,10 @@ class Controller:
 		self.textfont = pygame.font.SysFont("helvetica", 15)
 		self.startRect = pygame.Rect(180,320,80,30)
 		self.quitRect = pygame.Rect(380,320,80,30)
-		self.cannon = cannon.Cannon("Cannon","cannon.jpg")
-		self.castle = castle.Castle("Castle","castle.png")
-		#self.sprites = pygame.sprite.Group((self.cannon)) #Used for drawing the sprites, still a work in progress 
+		self.cannon = cannon.Cannon("Cannon", 0, 420, "cannon.jpg")
+		self.castle = castle.Castle("Castle", 450, 310, "castle.png")
+		self.cannonSprite = pygame.sprite.Group(self.cannon) #,self.castle) #Used for drawing the sprites, still a work in progress
+		self.castleSprite = pygame.sprite.Group(self.castle) #,self.castle) #Used for drawing the sprites, still a work in progress 
 	#Start Button
 	def startButton(self):
 		start = pygame.draw.rect(self.screen, (192,192,192), self.startRect, 0)#Draws start the rectangle
@@ -39,9 +40,8 @@ class Controller:
 		
 	#def mainGame(self): #Main Game screen
 		
-#		self.screen.blit(cannon.Cannon("Cannon", "cannon.jpg"),(0,0)) #Might not be necessary
 #		self.screen.blit(self.cannon(angle_label, (200,200))) 
-#		self.sprites.draw(self.screen) draws the sprites the the screen(work in progress)
+
 
 
 	def mainLoop(self):
@@ -51,12 +51,19 @@ class Controller:
 		done = False
 		start = False
 		title = False
+		titleScreen = pygame.image.load("background.jpg")
 		while not done:
-			titleScreen = pygame.image.load("background.jpg")
 			self.startButton()#display title screen with start and quit options
 			self.quitButton()
 			if title == True:
 				self.screen.fill((0,225,225))
+				self.cannonSprite.draw(self.screen)
+				self.castleSprite.draw(self.screen)
+				my_font = pygame.font.SysFont("Times New Roman", 12)	#creates font pygame will use to display angle/velocity
+				angle_label = my_font.render("Angle:" +str(self.cannon.angle), 1, BLACK)	#displays angle text
+				power_label = my_font.render("Power:" +str(self.cannon.power), 1, BLACK)	#displays velocity text
+				self.screen.blit(angle_label, (0,0))
+				self.screen.blit(power_label, (10,0))
 #			if "insert castle syntax here" hp == 0:
 #				title = False #stops the screen from being blitted blue
 #				start = False #Allows 'q' to quit again
@@ -80,26 +87,25 @@ class Controller:
 						self.cannon.powerChange(power)
 					if event.key == pygame.K_SPACE:
 						self.cannon.shoot()
-					if event.key == pygame.K_s or pygame.K_r:
-						start = True #start == FALSE: will set this to true when game starts to prevent reloading the game
-						title = True
-						#self.mainGame()
 					if event.key == pygame.K_q: 
 						if start == False:
 						    done = True
 						    pygame.quit()
 						    sys.exit()
+					if event.key == pygame.K_s:
+						start = True #start == FALSE: will set this to true when game starts to prevent reloading the game
+						title = True
+						#self.mainGame()
 #					if event.key == pygame.MOUSEBUTTONDOWN:
 #						mouse = pygame.mouse.get_pos()
 #						print(mouse)
 #						if quit.collide(mouse):
 #							stuff that would happen when 
 #							the mouse hits the start button
-			pygame.display.update()
+			pygame.display.flip()
 			self.screen.blit(self.background, (0,0))
 			self.screen.blit(titleScreen,(0,0))
 			
-
  
 
 
