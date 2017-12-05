@@ -12,17 +12,20 @@ class Controller:
 		self.height = height
 		self.screen = pygame.display.set_mode((self.width,self.height))
 		self.background = pygame.Surface(self.screen.get_size()).convert()
-		self.cannon = cannon
-		self.castle = castle
-		self.rock = rock
+		#self.cannon = cannon
+		#self.castle = castle
+		#self.rock = rock
 		self.textfont = pygame.font.SysFont("helvetica", 15)
 		self.startRect = pygame.Rect(180,320,80,30)
 		self.quitRect = pygame.Rect(380,320,80,30)
-		self.cannon = cannon.Cannon("Cannon", 0, 420, "cannon.jpg")
-		self.castle = castle.Castle("Castle", 450, 310, "castle.png")
+		self.cannon = cannon.Cannon(0, 420, "cannon.jpg")
+		self.castle = castle.Castle(450, 310, "castle.png")
+		self.castlerect = self.castle.rect
 		self.cannonSprite = pygame.sprite.Group(self.cannon) #,self.castle) #Used for drawing the sprites, still a work in progress
 		self.castleSprite = pygame.sprite.Group(self.castle) #,self.castle) #Used for drawing the sprites, still a work in progress 
+		self.shot = 0
 	#Start Button
+		self.rockSprite = []
 	def startButton(self):
 		start = pygame.draw.rect(self.screen, (192,192,192), self.startRect, 0)#Draws start the rectangle
 		startGame = self.textfont.render("Start", 1, (255, 255, 0))
@@ -86,7 +89,9 @@ class Controller:
 						power = 1
 						self.cannon.powerChange(power)
 					if event.key == pygame.K_SPACE:
-						self.cannon.shoot()
+						self.rockSprite.append(rock.Rock('rocky.jpg'))
+						self.shot = 1
+						self.cannon.shoot(self.rockSprite[0])
 					if event.key == pygame.K_q: 
 						if start == False:
 						    done = True
@@ -102,10 +107,17 @@ class Controller:
 #						if quit.collide(mouse):
 #							stuff that would happen when 
 #							the mouse hits the start button
-			pygame.display.flip()
-			self.screen.blit(self.background, (0,0))
-			self.screen.blit(titleScreen,(0,0))
-			
+			try:
+				if self.shot == 1:
+					if (pygame.sprite.collide_rect(self.castleSprite, self.rockSprite[0])):
+						self.castle.getHit()
+						del self.rockSprite[0]
+						self.background.fill((250,0,0))
+						self.shot = 0
+			finally:
+				pygame.display.flip()
+				self.screen.blit(self.background, (0,0))
+				self.screen.blit(titleScreen,(0,0))
  
 
 
