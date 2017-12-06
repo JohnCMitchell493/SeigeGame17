@@ -13,6 +13,7 @@ class Controller:
 		self.screen = pygame.display.set_mode((self.width,self.height))
 		self.background = pygame.Surface(self.screen.get_size()).convert()
 		self.textfont = pygame.font.SysFont("helvetica", 15)
+		self.titlefont = pygame.font.SysFont("helvetica", 90)
 		self.startRect = pygame.Rect(180,320,80,30)
 		self.quitRect = pygame.Rect(380,320,80,30)
 		self.cannon = cannon.Cannon(0, 420, "cannon.jpg")
@@ -27,17 +28,25 @@ class Controller:
 	#Start Button
 	def startButton(self):
 		start = pygame.draw.rect(self.screen, (192,192,192), self.startRect, 0)#Draws start the rectangle
-		startGame = self.textfont.render("Start", 1, (255, 255, 0))
+		startGame = self.textfont.render("Start", 1, (BLACK))
 		self.screen.blit(startGame, (205, 325))	#Blits the text/button to the rect
-
-
+	#Retry Button
+	def retryButton(self):
+		start = pygame.draw.rect(self.screen, (192,192,192), self.startRect, 0)#Draws start the rectangle
+		startGame = self.textfont.render("Retry", 1, (BLACK))
+		self.screen.blit(startGame, (205, 325))	#Blits the text/button to the rect
 
 	#Quit Button
 	def quitButton(self):
 		quit = pygame.draw.rect(self.screen, (192,192,192), self.quitRect, 0)#Draws quit the rectangle
-		quitGame = self.textfont.render("Quit", 1, (255, 255, 0))
+		quitGame = self.textfont.render("Quit", 1, (BLACK))
 		self.screen.blit(quitGame, (410, 325))	#Blits the text/button to the rect
- 
+	
+	#Main title text
+	def titleText(self): 
+		tText = self.titlefont.render("SIEGE", 1, (174,34,34))
+		self.screen.blit(tText, (208,100)) 
+
 	def mainLoop(self):
 		#Event Processing
 		done = False 
@@ -49,6 +58,7 @@ class Controller:
 		while not done:
 			self.startButton()#display title screen with start and quit options
 			self.quitButton()
+			self.titleText()
 			if title == False:
 				retry = False
 				self.screen.fill((0,225,225))
@@ -64,6 +74,8 @@ class Controller:
 					self.screen.fill(BLACK)
 					retry = True
 					"import victory background for x amount of seconds"
+					self.quitButton()
+					self.retryButton()
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					done = True
@@ -81,7 +93,6 @@ class Controller:
 						power = 1
 						self.cannon.powerChange(power)
 					if event.key == pygame.K_SPACE:
-						#self.rockSprite.append(rock.Rock('rocky.jpg'))
 						self.shot = 1
 						results = self.cannon.shoot()
 						ang = results[0]
@@ -93,10 +104,19 @@ class Controller:
 							pygame.quit()
 							sys.exit()
 					if event.key == pygame.K_s:
-						start = True #start == FALSE: will set this to true when game starts to prevent reloading the game
-						title = False
-						self.castle.resetHP()
-						
+						if retry != True:
+							start = True #start == FALSE: will set this to true when game starts to prevent reloading the game
+							title = False
+							self.castle.resetHP()
+							self.rock.rect.x = 105
+							self.rock.rect.y = 420
+					if event.key == pygame.K_r:
+						if retry == True:
+							start = True #start == FALSE: will set this to true when game starts to prevent reloading the game
+							title = False
+							self.castle.resetHP()
+							self.rock.rect.x = 105
+							self.rock.rect.y = 420
 						#self.mainGame()
 #					if event.key == pygame.MOUSEBUTTONDOWN:
 #						mouse = pygame.mouse.get_pos()
@@ -111,9 +131,6 @@ class Controller:
 						self.rock.rect.x = 105
 						self.rock.rect.y = 420
 						self.shot = 0
-						if title == False:
-							self.screen.fill((250,0,0))
-					
 			finally:
 				pygame.display.flip()
 				self.screen.blit(self.background, (0,0))
