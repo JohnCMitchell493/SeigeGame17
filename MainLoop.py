@@ -142,7 +142,7 @@ class Controller:
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					mpos = pygame.mouse.get_pos()
 					if self.startRect.collidepoint(mpos):
-						if retry == True:
+						if retry != True:
 							start = True
 							title = False
 							self.castle.resetHP()
@@ -153,13 +153,14 @@ class Controller:
 							done = True
 							pygame.quit()
 							sys.exit()
-						#self.mainGame()
-#					if event.key == pygame.MOUSEBUTTONDOWN:
-#						mouse = pygame.mouse.get_pos()
-#						print(mouse)
-#						if quit.collide(mouse):
-#							stuff that would happen when
-#							the mouse hits the start button
+					if self.startRect.collidepoint(mpos):
+						if retry == True:
+							start = True
+							title = False
+							self.castle.resetHP()
+							self.rock.rect.x = 105
+							self.rock.rect.y = 420
+
 			try:
 				if self.shot == 1:
 					if (pygame.sprite.collide_rect(self.castle, self.rock)):
