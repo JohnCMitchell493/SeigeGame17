@@ -119,20 +119,18 @@ class Controller:
 							self.rock.rect.y = 420
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					mpos = pygame.mouse.get_pos()
-					if mpos[0] >= 180 and mpos[0] <= 260
-						if mpos[1] >= 320 and mpos[1] <= 350
-							if retry != True:
-								start = True
-								title = False
-								self.castle.resetHP()
-								self.rock.rect.x = 105
-								self.rock.rect.y = 420
-					if mpos[0] >= 380 and mpos[0] <= 460
-						if mpos[1] >= 320 and mpos[1] <= 350
-							if start == False or retry == True:
-								done = True
-								pygame.quit()
-								sys.exit()
+					if self.startRect.collidepoint(mpos):
+						if retry != True:
+							start = True
+							title = False
+							self.castle.resetHP()
+							self.rock.rect.x = 105
+							self.rock.rect.y = 420
+					if self.quitRect.collidepoint(mpos):
+						if start == False or retry == True:
+							done = True
+							pygame.quit()
+							sys.exit()
 						#self.mainGame()
 #					if event.key == pygame.MOUSEBUTTONDOWN:
 #						mouse = pygame.mouse.get_pos()
@@ -157,3 +155,4 @@ def main():
 	main_window = Controller()
 	main_window.mainLoop()
 main()
+
