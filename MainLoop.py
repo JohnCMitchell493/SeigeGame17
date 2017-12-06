@@ -24,6 +24,11 @@ class Controller:
 		self.castleSprite = pygame.sprite.Group(self.castle) ##Used for drawing the castle sprite
 		self.rockSprite = pygame.sprite.Group(self.rock) ##Used for drawing the rock sprite
 		self.shot = 0
+		self.angle = 0
+		self.velocity = 0
+		self.ixvelocity =0
+		self.iyvelocity = 0
+		self.rocktime = 0
 		#self.rockSprite = []
 	#Start Button
 	def startButton(self):
@@ -46,6 +51,22 @@ class Controller:
 	def titleText(self):
 		tText = self.titlefont.render("SIEGE", 1, (174,34,34))
 		self.screen.blit(tText, (208,100))
+		
+	def rockUpdate(self):
+		if self.shot == 1:
+			if self.rocktime == 0:
+				startup = self.rock.calculateInitialVelocity(self.angle,self.velocity)
+				self.ixvelocity = startup[0]
+				self.iyvelocity = startup[1]
+				move = self.rock.iterCalcVelocity(self.ixvelocity,self.iyvelocity,self.rocktime)
+				self.rock.rect.x = 105 + move[0]
+				self.rock.rect.y = 420 - move[1]
+				self.rocktime += 1
+			else:
+				move = self.rock.iterCalcVelocity(self.ixvelocity,self.iyvelocity,self.rocktime)
+				self.rock.rect.x = 105 + move[0]
+				self.rock.rect.y = 420 - move[1]
+				self.rocktime += 1
 
 	def mainLoop(self):
 		#Event Processing
@@ -94,10 +115,11 @@ class Controller:
 						self.cannon.powerChange(power)
 					if event.key == pygame.K_SPACE:
 						self.shot = 1
+						self.rock.rect.x = 105
+						self.rock.rect.y = 420
 						results = self.cannon.shoot()
-						ang = results[0]
-						vel = results[1]
-						self.rock.launch(ang,vel)
+						self.angle = results[0]
+						self.velocity = results[1]
 					if event.key == pygame.K_q:
 						if start == False or retry == True:
 							done = True
@@ -144,9 +166,11 @@ class Controller:
 						self.castle.getHit()
 						self.rock.rect.x = 105
 						self.rock.rect.y = 420
-						self.shot = 0
 						self.screen.fill((255, 0, 0))
+						self.rocktime = 0
+						self.shot = 0
 			finally:
+				self.rockUpdate()
 				pygame.display.flip()
 				self.screen.blit(self.background, (0,0))
 				self.screen.blit(titleScreen,(0,0))
