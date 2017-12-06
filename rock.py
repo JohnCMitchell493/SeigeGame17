@@ -24,25 +24,59 @@ class Rock(pygame.sprite.Sprite):
 #		else:
 #			return False
 
-	def launch(self, angle, velocity):
+	def calculateInitialVelocity(self,angle,velocity):
 		self.angle = angle
 		self.velocity = velocity
-		gravity = 9.8		#gravity is constant
 		self.time = 10000
 		radangle = angle * (math.pi/180)
 		compradangle = 180 - (angle + 90)
 		radangle2 = compradangle * (math.pi/180)
 		vely = (velocity * math.sin(radangle))/(math.sin(90))	#calculates initial x distance
 		velx = (velocity * math.sin(radangle2))/(math.sin(90))	#calculates initial y distance
+		return (velx, vely)
+
+	def isOutside(self):
+		if self.rect.x == 640 or self.rect.x >= 640:
+			return True
+		elif self.rect.y == 480 or self.rect.y >= 480:
+			return True
+		else:
+			return False
+
+	def iterCalcVelocity(self,xvel,yvel,time):
+		xmove = xvel * time
+		ymove = (yvel * time) - (.5*9.8*(time**2))
+		return (xmove,ymove)
+
+	def test(self,angle,velocity):
+		results = self.calculateInitialVelocity(angle,velocity)
+		velx = results[0]
+		vely = results[1]
 		self.rect.x += velx
 		self.rect.y -= vely
-#		for i in range(self.time):		#formula loop.  i is time.  Does not actually loop every second, look into later
-#			xmove = velx*i					#horizontal distance = speed*time, horizontal speed is constant because no wind
-#			ymove = 480-((vely*i)-(.5*gravity*(i**2)))		#vertical distance = (initial velocity)(time) - (1/2)(gravity)(time**2)
-#			self.rect.move(xmove,ymove)		#Move to new location based on calculated position
-#			if xmove >= 640:				#if the rock's position moves to below the 'ground', or to beyond the 'right
-#				self.rect.move(700,700)		#border', the rock automatically relocates to a position outside the game
-#				return 'Miss!'
-#			if ymove >= 480:
-#				self.rect.move(700,700)
-#				return 'Miss!'
+		if self.isOutside() == True:
+			self.rect.x = 105
+			self.rect.y = 420
+			print('Miss!')
+			
+	def launch(self, angle, velocity):
+		results = self.calculateInitialVelocity(angle,velocity)
+		velx = results[0]
+		vely = results[1]
+		gravity = 9.8
+		for i in range(1,self.time):
+			results = self.iterCalcVelocity(velx,vely,i)
+			xmove = results[0]
+			ymove = results[1]
+			self.rect.x = xmove + 105
+			self.rect.y = 420-ymove
+			print(self.rect.x)
+			print(self.rect.y) 
+#			self.rect.x = xmove+105
+#			self.rect.y = -(ymove)+840
+			pygame.time.wait(1000)
+			if self.isOutside() == True:
+				self.rect.x = 105
+				self.rect.y = 420
+				print('Miss!')
+				break
