@@ -1,4 +1,5 @@
 import pygame
+import cannon
 import castle
 import math
 
@@ -23,7 +24,7 @@ class Rock(pygame.sprite.Sprite):
 #		else:
 #			return False
 
-	def launch(self, angle, velocity,castle):
+	def launch(self, angle, velocity):
 		self.angle = angle
 		self.velocity = velocity
 		gravity = 9.8		#gravity is constant
