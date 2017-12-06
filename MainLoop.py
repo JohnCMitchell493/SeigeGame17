@@ -21,7 +21,7 @@ class Controller:
 		self.rock = rock.Rock(105,420, "rocky.jpg")
 		self.castlerect = self.castle.rect
 		self.cannonSprite = pygame.sprite.Group(self.cannon) ##Used for drawing the cannon sprite
-		self.castleSprite = pygame.sprite.Group(self.castle) ##Used for drawing the castle sprite 
+		self.castleSprite = pygame.sprite.Group(self.castle) ##Used for drawing the castle sprite
 		self.rockSprite = pygame.sprite.Group(self.rock) ##Used for drawing the rock sprite
 		self.shot = 0
 		#self.rockSprite = []
@@ -41,15 +41,15 @@ class Controller:
 		quit = pygame.draw.rect(self.screen, (192,192,192), self.quitRect, 0)#Draws quit the rectangle
 		quitGame = self.textfont.render("Quit", 1, (BLACK))
 		self.screen.blit(quitGame, (410, 325))	#Blits the text/button to the rect
-	
+
 	#Main title text
-	def titleText(self): 
+	def titleText(self):
 		tText = self.titlefont.render("SIEGE", 1, (174,34,34))
-		self.screen.blit(tText, (208,100)) 
+		self.screen.blit(tText, (208,100))
 
 	def mainLoop(self):
 		#Event Processing
-		done = False 
+		done = False
 		start = False #If false, causes while 'while not done' to become 'True' and closes the game window
 		title = True #If false, pressing S will not start the game over again
 		retry = False
@@ -98,7 +98,7 @@ class Controller:
 						ang = results[0]
 						vel = results[1]
 						self.rock.launch(ang,vel)
-					if event.key == pygame.K_q: 
+					if event.key == pygame.K_q:
 						if start == False or retry == True:
 							done = True
 							pygame.quit()
@@ -117,12 +117,28 @@ class Controller:
 							self.castle.resetHP()
 							self.rock.rect.x = 105
 							self.rock.rect.y = 420
+				if event.type == pygame.MOUSEBUTTONDOWN:
+					mpos = pygame.mouse.get_pos()
+					if mpos[0] >= 180 and mpos[0] <= 260
+						if mpos[1] >= 320 and mpos[1] <= 350
+							if retry != True:
+								start = True
+								title = False
+								self.castle.resetHP()
+								self.rock.rect.x = 105
+								self.rock.rect.y = 420
+					if mpos[0] >= 380 and mpos[0] <= 460
+						if mpos[1] >= 320 and mpos[1] <= 350
+							if start == False or retry == True:
+								done = True
+								pygame.quit()
+								sys.exit()
 						#self.mainGame()
 #					if event.key == pygame.MOUSEBUTTONDOWN:
 #						mouse = pygame.mouse.get_pos()
 #						print(mouse)
 #						if quit.collide(mouse):
-#							stuff that would happen when 
+#							stuff that would happen when
 #							the mouse hits the start button
 			try:
 				if self.shot == 1:
