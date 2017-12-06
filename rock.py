@@ -4,7 +4,7 @@ import math
 
 class Rock(pygame.sprite.Sprite):
 
-	def __init__(self, filename):
+	def __init__(self, xcoor, ycoor, filename):
 		pygame.sprite.Sprite.__init__(self)
 		self.x = 0
 		self.y = 0
@@ -12,6 +12,8 @@ class Rock(pygame.sprite.Sprite):
 		self.size = self.image.get_size()
 		self.image2 = pygame.transform.scale(self.image, (int(self.size[0]*.05), int(self.size[1]*.05)))
 		self.rect = self.image2.get_rect()
+		self.rect.x = xcoor
+		self.rect.y = ycoor
 #		pygame.draw.circle(filename, (self.x,self.y), radius)
 
 #	def checkCollision(self, object1, object2):
