@@ -91,12 +91,15 @@ class Controller:
 					if event.key == pygame.K_SPACE:
 						#self.rockSprite.append(rock.Rock('rocky.jpg'))
 						self.shot = 1
-						self.cannon.shoot(self.rockSprite)#[0])
+						results = self.cannon.shoot()
+						ang = results[0]
+						vel = results[1]
+						self.rock.launch(ang,vel)
 					if event.key == pygame.K_q: 
 						if start == False:
-						    done = True
-						    pygame.quit()
-						    sys.exit()
+							done = True
+							pygame.quit()
+							sys.exit()
 					if event.key == pygame.K_s:
 						start = True #start == FALSE: will set this to true when game starts to prevent reloading the game
 						title = True
@@ -109,16 +112,16 @@ class Controller:
 #							the mouse hits the start button
 			try:
 				if self.shot == 1:
-					if (pygame.sprite.collide_rect(self.castle, self.rockSprite[0])):
+					if (pygame.sprite.collide_rect(self.castle, self.rockSprite)):
 						self.castle.getHit()
-						del self.rockSprite[0]
+						self.rock.rect.move(0,200)
 						self.background.fill((250,0,0))
 						self.shot = 0
 			finally:
 				pygame.display.flip()
 				self.screen.blit(self.background, (0,0))
 				self.screen.blit(titleScreen,(0,0))
- 
+
 
 
 
