@@ -120,7 +120,7 @@ class Controller:
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					mpos = pygame.mouse.get_pos()
 					if self.startRect.collidepoint(mpos):
-						if retry != True:
+						if retry == True:
 							start = True
 							title = False
 							self.castle.resetHP()
@@ -145,6 +145,7 @@ class Controller:
 						self.rock.rect.x = 105
 						self.rock.rect.y = 420
 						self.shot = 0
+						self.screen.fill((255, 0, 0))
 			finally:
 				pygame.display.flip()
 				self.screen.blit(self.background, (0,0))
