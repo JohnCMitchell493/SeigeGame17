@@ -120,8 +120,8 @@ class Controller:
 				if self.shot == 1:
 					if (pygame.sprite.collide_rect(self.castle, self.rock)):
 						self.castle.getHit()
-						self.rock.rect.x = 0
-						self.rock.rect.y = 0
+						self.rock.rect.x = 105
+						self.rock.rect.y = 420
 						self.background.fill((250,0,0))
 						self.shot = 0
 			finally:
