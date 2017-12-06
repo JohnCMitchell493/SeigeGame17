@@ -17,7 +17,7 @@ class Controller:
 		self.quitRect = pygame.Rect(380,320,80,30)
 		self.cannon = cannon.Cannon(0, 420, "cannon.jpg")
 		self.castle = castle.Castle(450, 310, "castle.png")
-		self.rock = rock.Rock(0,200, "rocky.jpg")
+		self.rock = rock.Rock(105,420, "rocky.jpg")
 		self.castlerect = self.castle.rect
 		self.cannonSprite = pygame.sprite.Group(self.cannon) ##Used for drawing the cannon sprite
 		self.castleSprite = pygame.sprite.Group(self.castle) ##Used for drawing the castle sprite 
@@ -54,9 +54,15 @@ class Controller:
 		start = False
 		title = False
 		titleScreen = pygame.image.load("background.jpg")
+		pygame.key.set_repeat(1,50)
 		while not done:
 			self.startButton()#display title screen with start and quit options
 			self.quitButton()
+			if  self.castle.hp == 0:
+				title = False #stops the screen from being blitted blue
+				start = False #Allows 'q' to quit again
+				"import victory background for x amount of seconds"
+				self.screen.fill(BLACK)
 			if title == True:
 				self.screen.fill((0,225,225))
 				self.rockSprite.draw(self.screen)
@@ -114,7 +120,8 @@ class Controller:
 				if self.shot == 1:
 					if (pygame.sprite.collide_rect(self.castle, self.rockSprite)):
 						self.castle.getHit()
-						self.rock.rect.move(0,200)
+						self.rock.rect.x = 0
+						self.rock.rect.y = 0
 						self.background.fill((250,0,0))
 						self.shot = 0
 			finally:
