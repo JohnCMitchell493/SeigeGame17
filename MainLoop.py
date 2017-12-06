@@ -37,33 +37,20 @@ class Controller:
 		quit = pygame.draw.rect(self.screen, (192,192,192), self.quitRect, 0)#Draws quit the rectangle
 		quitGame = self.textfont.render("Quit", 1, (255, 255, 0))
 		self.screen.blit(quitGame, (410, 325))	#Blits the text/button to the rect
-
-
-		
-	#def mainGame(self): #Main Game screen
-		
-#		self.screen.blit(self.cannon(angle_label, (200,200))) 
-
-
-
+ 
 	def mainLoop(self):
-
-
 		#Event Processing
-		done = False
-		start = False
-		title = False
+		done = False 
+		start = False #If false, causes while 'while not done' to become 'True' and closes the game window
+		title = True #If false, pressing S will not start the game over again
+		retry = False
 		titleScreen = pygame.image.load("background.jpg")
 		pygame.key.set_repeat(1,50)
 		while not done:
 			self.startButton()#display title screen with start and quit options
 			self.quitButton()
-			if  self.castle.hp == 0:
-				title = False #stops the screen from being blitted blue
-				start = False #Allows 'q' to quit again
-				"import victory background for x amount of seconds"
-				self.screen.fill(BLACK)
-			if title == True:
+			if title == False:
+				retry = False
 				self.screen.fill((0,225,225))
 				self.rockSprite.draw(self.screen)
 				self.cannonSprite.draw(self.screen)
@@ -73,11 +60,10 @@ class Controller:
 				power_label = my_font.render("Power:" +str(self.cannon.power), 1, BLACK)	#displays velocity text
 				self.screen.blit(angle_label, (0,0))
 				self.screen.blit(power_label, (50,0))
-#			if "insert castle syntax here" hp == 0:
-#				title = False #stops the screen from being blitted blue
-#				start = False #Allows 'q' to quit again
-#				"import victory background for x amount of seconds"
-#				put retry screen
+				if self.castle.hp == 0:
+					self.screen.fill(BLACK)
+					retry = True
+					"import victory background for x amount of seconds"
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					done = True
@@ -102,13 +88,15 @@ class Controller:
 						vel = results[1]
 						self.rock.launch(ang,vel)
 					if event.key == pygame.K_q: 
-						if start == False:
+						if start == False or retry == True:
 							done = True
 							pygame.quit()
 							sys.exit()
 					if event.key == pygame.K_s:
 						start = True #start == FALSE: will set this to true when game starts to prevent reloading the game
-						title = True
+						title = False
+						self.castle.resetHP()
+						
 						#self.mainGame()
 #					if event.key == pygame.MOUSEBUTTONDOWN:
 #						mouse = pygame.mouse.get_pos()
@@ -122,15 +110,14 @@ class Controller:
 						self.castle.getHit()
 						self.rock.rect.x = 105
 						self.rock.rect.y = 420
-						self.background.fill((250,0,0))
 						self.shot = 0
+						if title == False:
+							self.screen.fill((250,0,0))
+					
 			finally:
 				pygame.display.flip()
 				self.screen.blit(self.background, (0,0))
 				self.screen.blit(titleScreen,(0,0))
-
-
-
 
 
 def main():
