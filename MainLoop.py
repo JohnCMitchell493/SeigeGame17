@@ -109,7 +109,7 @@ class Controller:
 #							the mouse hits the start button
 			try:
 				if self.shot == 1:
-					if (pygame.sprite.collide_rect(self.castleSprite, self.rockSprite[0])):
+					if (pygame.sprite.collide_rect(self.castle, self.rockSprite[0])):
 						self.castle.getHit()
 						del self.rockSprite[0]
 						self.background.fill((250,0,0))
