@@ -37,5 +37,5 @@ class Cannon(pygame.sprite.Sprite):
 				self.power = 0
 			else:
 				self.power -= 1	#power lowers by 1
-	def shoot(self,rock):
-		rock.launch(self.angle,self.power,castle)	#shoots the damn boulder
+	def shoot(self):
+		return [self.angle,self.power]
