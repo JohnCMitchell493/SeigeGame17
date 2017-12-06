@@ -12,20 +12,19 @@ class Controller:
 		self.height = height
 		self.screen = pygame.display.set_mode((self.width,self.height))
 		self.background = pygame.Surface(self.screen.get_size()).convert()
-		#self.cannon = cannon
-		#self.castle = castle
-		#self.rock = rock
 		self.textfont = pygame.font.SysFont("helvetica", 15)
 		self.startRect = pygame.Rect(180,320,80,30)
 		self.quitRect = pygame.Rect(380,320,80,30)
 		self.cannon = cannon.Cannon(0, 420, "cannon.jpg")
 		self.castle = castle.Castle(450, 310, "castle.png")
+		self.rock = rock.Rock(0,200, "rocky.jpg")
 		self.castlerect = self.castle.rect
-		self.cannonSprite = pygame.sprite.Group(self.cannon) #,self.castle) #Used for drawing the cannon sprite
-		self.castleSprite = pygame.sprite.Group(self.castle) #,self.castle) #Used for drawing the castle sprite 
+		self.cannonSprite = pygame.sprite.Group(self.cannon) ##Used for drawing the cannon sprite
+		self.castleSprite = pygame.sprite.Group(self.castle) ##Used for drawing the castle sprite 
+		self.rockSprite = pygame.sprite.Group(self.rock) ##Used for drawing the rock sprite
 		self.shot = 0
+		#self.rockSprite = []
 	#Start Button
-		self.rockSprite = []
 	def startButton(self):
 		start = pygame.draw.rect(self.screen, (192,192,192), self.startRect, 0)#Draws start the rectangle
 		startGame = self.textfont.render("Start", 1, (255, 255, 0))
@@ -60,13 +59,14 @@ class Controller:
 			self.quitButton()
 			if title == True:
 				self.screen.fill((0,225,225))
+				self.rockSprite.draw(self.screen)
 				self.cannonSprite.draw(self.screen)
 				self.castleSprite.draw(self.screen)
 				my_font = pygame.font.SysFont("Times New Roman", 12)	#creates font pygame will use to display angle/velocity
 				angle_label = my_font.render("Angle:" +str(self.cannon.angle), 1, BLACK)	#displays angle text
 				power_label = my_font.render("Power:" +str(self.cannon.power), 1, BLACK)	#displays velocity text
 				self.screen.blit(angle_label, (0,0))
-				self.screen.blit(power_label, (10,0))
+				self.screen.blit(power_label, (50,0))
 #			if "insert castle syntax here" hp == 0:
 #				title = False #stops the screen from being blitted blue
 #				start = False #Allows 'q' to quit again
@@ -89,9 +89,9 @@ class Controller:
 						power = 1
 						self.cannon.powerChange(power)
 					if event.key == pygame.K_SPACE:
-						self.rockSprite.append(rock.Rock('rocky.jpg'))
+						#self.rockSprite.append(rock.Rock('rocky.jpg'))
 						self.shot = 1
-						self.cannon.shoot(self.rockSprite[0])
+						self.cannon.shoot(self.rockSprite)#[0])
 					if event.key == pygame.K_q: 
 						if start == False:
 						    done = True
