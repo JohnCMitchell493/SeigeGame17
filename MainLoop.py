@@ -115,8 +115,6 @@ class Controller:
 						self.cannon.powerChange(power)
 					if event.key == pygame.K_SPACE:
 						self.shot = 1
-						self.rock.rect.x = 105
-						self.rock.rect.y = 420
 						results = self.cannon.shoot()
 						self.angle = results[0]
 						self.velocity = results[1]
@@ -142,7 +140,9 @@ class Controller:
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					mpos = pygame.mouse.get_pos()
 					if self.startRect.collidepoint(mpos):
-						if retry != True:
+						if retry != True or retry == True:
+							self.angle = 0
+							self.velocity = 0
 							start = True
 							title = False
 							self.castle.resetHP()
@@ -153,13 +153,6 @@ class Controller:
 							done = True
 							pygame.quit()
 							sys.exit()
-					if self.startRect.collidepoint(mpos):
-						if retry == True:
-							start = True
-							title = False
-							self.castle.resetHP()
-							self.rock.rect.x = 105
-							self.rock.rect.y = 420
 
 			try:
 				if self.shot == 1:
@@ -167,7 +160,19 @@ class Controller:
 						self.castle.getHit()
 						self.rock.rect.x = 105
 						self.rock.rect.y = 420
-						self.screen.fill((255, 0, 0))
+						self.rocktime = 0
+						self.shot = 0
+						if self.castle.hp != 0:
+							self.screen.fill((255, 0, 0))
+					if self.rock.rect.x == 640 or self.rock.rect.x >= 640:
+						self.rock.rect.x = 105
+						self.rock.rect.y = 420
+						self.rocktime = 0
+						self.shot = 0
+						
+					if self.rock.rect.y == 480 or self.rock.rect.y >= 480:
+						self.rock.rect.x = 105
+						self.rock.rect.y = 420
 						self.rocktime = 0
 						self.shot = 0
 			finally:
@@ -181,4 +186,3 @@ def main():
 	main_window = Controller()
 	main_window.mainLoop()
 main()
-
