@@ -6,6 +6,11 @@ import math
 class Rock(pygame.sprite.Sprite):
 
 	def __init__(self, xcoor, ycoor, filename):
+		'''
+		Description: Initializes the Rock class
+		Parameters: self, xcoor, ycoor, filename - self is the default class parameter, xcoor and ycoor are the passed in coordinates, filename is the file's name
+		Return: none
+		'''
 		pygame.sprite.Sprite.__init__(self)
 		self.x = 0
 		self.y = 0
@@ -17,6 +22,11 @@ class Rock(pygame.sprite.Sprite):
 		self.rect.y = ycoor
 
 	def calculateInitialVelocity(self,angle,velocity):
+		'''
+		Description: Caculates the initial velocity the rock launches at
+		Parameters: self, angle, velocity - self is the default class parameter, angle is the rock's angle, velocity is the speed of the rock
+		Return: velx, vely - velx is the velocity on the x axis, vely is the velocity on the y axis
+		'''
 		self.angle = angle
 		self.velocity = velocity
 		self.time = 10000
@@ -27,26 +37,15 @@ class Rock(pygame.sprite.Sprite):
 		velx = (velocity * math.sin(radangle2))/(math.sin(90))	#calculates initial y distance
 		return (velx, vely)
 
-	def isOutside(self):
-		if self.rect.x == 640 or self.rect.x >= 640:
-			self.rect.x = 105
-		elif self.rect.y == 480 or self.rect.y >= 480:
-			self.rect.y = 420
 
 	def iterCalcVelocity(self,xvel,yvel,time):
+		'''
+		Description: Calculates the velocity per iteration
+		Parameters: self, xvel, yvel, time - self is the default class parameter, xvel and yvel is the x and y velocity, time is the time passed
+		Return: xmove, ymove - xmove and ymove are the new values the rect will move to in coordinates
+		'''
 		xmove = xvel * time
 		ymove = (yvel * time) - (.5*9.8*(time**2))
 		return (xmove,ymove)
 
-	def test(self,angle,velocity):
-		results = self.calculateInitialVelocity(angle,velocity)
-		velx = results[0]
-		vely = results[1]
-		self.rect.x += velx
-		self.rect.y -= vely
-		if self.isOutside() == True:
-			self.rect.x = 105
-			self.rect.y = 420
-			print('Miss!')
-			
 	
