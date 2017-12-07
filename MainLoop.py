@@ -7,11 +7,11 @@ import math
 BLACK = (0, 0, 0)
 class Controller:
 	def __init__(self, width=640, height=480):
-	'''
-	Description: The main controller class that handles the images
-	Parameters: self, width, height - self is the default class parameter, width is the screen width, height is the screen height
-	Return:none
-	'''
+		'''
+		Description: The main controller class that handles the images
+		Parameters: self, width, height - self is the default class parameter, width is the screen width, height is the screen height
+		Return:none
+		'''
 		pygame.init()
 		self.width = width
 		self.height = height
