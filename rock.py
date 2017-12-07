@@ -15,14 +15,6 @@ class Rock(pygame.sprite.Sprite):
 		self.rect = self.image2.get_rect()
 		self.rect.x = xcoor
 		self.rect.y = ycoor
-#		pygame.draw.circle(filename, (self.x,self.y), radius)
-
-#	def checkCollision(self, object1, object2):
-#		collision = pygame.sprite.collide_rect(object1, object2)
-#		if collision == True:
-#			return True
-#		else:
-#			return False
 
 	def calculateInitialVelocity(self,angle,velocity):
 		self.angle = angle
@@ -37,11 +29,9 @@ class Rock(pygame.sprite.Sprite):
 
 	def isOutside(self):
 		if self.rect.x == 640 or self.rect.x >= 640:
-			return True
+			self.rect.x = 105
 		elif self.rect.y == 480 or self.rect.y >= 480:
-			return True
-		else:
-			return False
+			self.rect.y = 420
 
 	def iterCalcVelocity(self,xvel,yvel,time):
 		xmove = xvel * time
@@ -59,24 +49,4 @@ class Rock(pygame.sprite.Sprite):
 			self.rect.y = 420
 			print('Miss!')
 			
-	def launch(self, angle, velocity):
-		results = self.calculateInitialVelocity(angle,velocity)
-		velx = results[0]
-		vely = results[1]
-		gravity = 9.8
-		for i in range(1,self.time):
-			results = self.iterCalcVelocity(velx,vely,i)
-			xmove = results[0]
-			ymove = results[1]
-			self.rect.x = xmove + 105
-			self.rect.y = 420-ymove
-			print(self.rect.x)
-			print(self.rect.y) 
-#			self.rect.x = xmove+105
-#			self.rect.y = -(ymove)+840
-			pygame.time.wait(1000)
-			if self.isOutside() == True:
-				self.rect.x = 105
-				self.rect.y = 420
-				print('Miss!')
-				break
+	
