@@ -3,8 +3,6 @@ import math
 class Castle(pygame.sprite.Sprite):
 	def __init__(self, xcoor, ycoor, filename):
 		pygame.sprite.Sprite.__init__(self)
-#		self.x = xcoor
-#		self.y = ycoor
 		self.image = pygame.image.load(filename).convert()
 		self.size = self.image.get_size()
 		self.rect = self.image.get_rect()
