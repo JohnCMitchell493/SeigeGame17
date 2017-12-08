@@ -157,7 +157,7 @@ class Controller:
 						self.defeatText()
 					self.quitButton()
 					self.retryButton()
-			for event in pygame.event.get():
+                        for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					done = True
 				if event.type == pygame.KEYDOWN:
